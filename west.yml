@@ -6,8 +6,8 @@ manifest:
   remotes:
     - name: ncs
       url-base: git@github.com:nrfconnect
-    - name: zephyr
-      url-base: git@github.com:zephyrproject-rtos
+    # - name: zephyr
+    #   url-base: git@github.com:zephyrproject-rtos
 
   projects: 
     # nordic toolchain added to this project (includes zephyr)
@@ -18,9 +18,9 @@ manifest:
       # revision: main
       import: true
       clone-depth: 1
-    # tflite
-    - name: tflite_micro
-      remote: zephyr
-      repo-path: tflite-micro
-      path: modules/lib/tflite_micro
-      revision: 9156d050927012da87079064db59d07f03b8baf6
+    # # tflite
+    # - name: tflite_micro
+    #   remote: zephyr
+    #   repo-path: tflite-micro
+    #   path: modules/lib/tflite_micro
+    #   revision: 9156d050927012da87079064db59d07f03b8baf6
