@@ -2,7 +2,7 @@ zephyr_library()
 
 zephyr_library_sources(
     assert.cpp
-    constants.c
+    constants.cpp
     main_functions.cpp
     model.cpp
     output_handler.cpp
