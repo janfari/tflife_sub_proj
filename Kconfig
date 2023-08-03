@@ -1,1 +1,6 @@
 # Empty
+
+config TFLITE_SUBPROJECT
+    bool "Tensorflow Lite subproject."
+    help
+      Tensorflow Lite subproject.

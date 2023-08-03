@@ -14,17 +14,19 @@
  * limitations under the License.
  */
 
-#include "main_functions.h"
+#include <main_functions.h>
 
 #include <tensorflow/lite/micro/all_ops_resolver.h>
-#include "constants.h"
-#include "model.hpp"
-#include "output_handler.hpp"
+#include <constants.h>
+#include <model.hpp>
+#include <output_handler.hpp>
 #include <tensorflow/lite/micro/micro_error_reporter.h>
 #include <tensorflow/lite/micro/micro_interpreter.h>
 #include <tensorflow/lite/micro/system_setup.h>
 #include <tensorflow/lite/schema/schema_generated.h>
 
+#include <zephyr/logging/log.h>
+LOG_MODULE_REGISTER(tflite_sub);
 /* Globals, used for compatibility with Arduino-style sketches. */
 namespace {
 	tflite::ErrorReporter *error_reporter = nullptr;
@@ -39,8 +41,9 @@ namespace {
 }  /* namespace */
 
 /* The name of this function is important for Arduino compatibility. */
-void setup(void)
+void tf_subpj_setup(void)
 {
+	LOG_INF("Setting up tf lite sub project");
 	/* Set up logging. Google style is to avoid globals or statics because of
 	 * lifetime uncertainty, but since this has a trivial destructor it's okay.
 	 * NOLINTNEXTLINE(runtime-global-variables)
@@ -87,7 +90,7 @@ void setup(void)
 }
 
 /* The name of this function is important for Arduino compatibility. */
-void loop(void)
+void tf_subpj_loop()
 {
 	/* Calculate an x value to feed into the model. We compare the current
 	 * inference_count to the number of inferences per cycle to determine
@@ -96,6 +99,8 @@ void loop(void)
 	 */
 	float position = static_cast < float > (inference_count) /
 			 static_cast < float > (kInferencesPerCycle);
+	// float position = (float)(inference_count) /
+	// 		(float)(kInferencesPerCycle);
 	float x = position * kXrange;
 
 	/* Quantize the input from floating-point to integer */
