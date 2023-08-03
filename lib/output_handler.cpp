@@ -15,14 +15,12 @@
  */
 
 #include <output_handler.hpp>
-#include <zephyr/logging/log.h>
-LOG_MODULE_REGISTER(tflite_sub_output_handler);
+
 void HandleOutput(tflite::ErrorReporter *error_reporter, float x_value,
 		  float y_value)
 {
 	/* Log the current X and Y values */
-	LOG_INF("x_value: %f, y_value: %f", static_cast < double > (x_value), static_cast < double > (y_value));
-	// TF_LITE_REPORT_ERROR(error_reporter, "x_value: %f, y_value: %f\n",
-	// 		     static_cast < double > (x_value),
-	// 		     static_cast < double > (y_value));
+	TF_LITE_REPORT_ERROR(error_reporter, "x_value: %f, y_value: %f\n",
+			     static_cast < double > (x_value),
+			     static_cast < double > (y_value));
 }
